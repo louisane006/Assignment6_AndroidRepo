@@ -8,6 +8,13 @@ import za.ac.cput.assignment6.Domain.Shop;
 /**
  * Created by louisane Malu on 4/2/2016.
  */
-public interface ShopFactory {
-    Shop createShop(String identification, double size, String address, List<Parts> part);
+public class ShopFactory {
+    public static Shop shop(Long i, double n, String a, List<Parts> part){
+        return new Shop.Builder()
+                .identification(i)
+                .size(n)
+                .address(a)
+                .part(part)
+                .build();
+    }
 }

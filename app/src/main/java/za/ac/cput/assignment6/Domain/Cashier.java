@@ -11,7 +11,7 @@ public class Cashier implements Serializable{
         private static final long serialVersionUID = 1L;
         //@Id
         //@GeneratedValue(strategy = GenerationType.AUTO)
-        private String identification;
+        private Long identification;
         private String name;
         private String surname;
         private String taskNumber;
@@ -26,11 +26,16 @@ public class Cashier implements Serializable{
             private String name;
             private String surname;
             private String taskNumber;
-            private String identification;
+            private Long identification;
 
             public Builder(String num) {
                 taskNumber = num;
             }
+
+            public Builder() {
+
+            }
+
             public Builder name(String name){
                 this.name = name;
                 return this;
@@ -39,7 +44,7 @@ public class Cashier implements Serializable{
                 this.surname = surname;
                 return this;
             }
-            public Builder identification(String i){
+            public Builder identification(Long i){
                 identification = i;
                 return this;
             }
@@ -53,11 +58,23 @@ public class Cashier implements Serializable{
             public Cashier build(){
                 return new Cashier(this);
             }
+
+            public Builder taskNum(String t) {
+                return this;
+            }
+
+            public Builder copy(Cashier value) {
+                this.identification = value.identification;
+                this.name=value.name;
+                this.surname=value.surname;
+                this.taskNumber= value.taskNumber;
+                return  this;
+            }
         }
-        public String getIdentification() {
+        public Long getIdentification() {
             return identification;
         }
-        public void setIdentification(String identification) {
+        public void setIdentification(Long identification) {
             this.identification = identification;
         }
         public String getName() {

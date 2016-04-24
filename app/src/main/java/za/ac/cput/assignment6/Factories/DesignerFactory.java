@@ -5,6 +5,13 @@ import za.ac.cput.assignment6.Domain.Designer;
 /**
  * Created by louisane Malu on 4/2/2016.
  */
-public interface DesignerFactory {
-    public Designer createDesigner(String identification, String name, String surname, String taskNum);
+public class DesignerFactory {
+    public static Designer des(Long i, String n, String snm, String t){
+        return new Designer.Builder()
+                .identification(i)
+                .name(n)
+                .surname(snm)
+                .taskNumber(t)
+                .build();
+    }
 }

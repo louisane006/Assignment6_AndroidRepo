@@ -8,55 +8,49 @@ import java.io.Serializable;
 public class Designer implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+
+    private Long identification;
     private String name;
     private String surname;
     private String taskNum;
 
-   // @Embedded
     private Brochure broch;
-    //@Embedded
-    private Frame frame;
+    private Brand frame;
 
-    /*@OneToOne
-    @JoinColumn(name= "Designer_id")
-    private Computer comp;*/
-
-   // @OneToOne
-    //@JoinColumn(name= "Designer_number")
-    //private Laptop laptop;
-
-    private Designer(Builder b){
+    public Designer(Builder b){
         this.name = b.name;
         this.surname = b.surname;
         this.taskNum = b.taskNum;
         this.identification = b.identification;
         this.broch = b.broch;
         this.frame = b.frame;
-        //this.laptop = b.laptop;
-        //this.comp = b.comp;
     }
+
+    public Designer() {
+
+    }
+
     public static class Builder{
-        private String identification;
+        private Long identification;
         private String name;
         private String surname;
         private String taskNum;
         private Brochure broch;
-        private Frame frame;
-        //private Laptop laptop;
-        //private Computer comp;
+        private Brand frame;
 
         public Builder(String taskNum) {
             this.taskNum = taskNum;
         }
+
+        public Builder() {
+
+        }
+
         public Builder name(String name){
             this.name = name;
             return this;
         }
-
-        public Builder identification(String identification){
+        public Builder identification(Long identification){
             this.identification = identification;
             return this;
         }
@@ -64,15 +58,7 @@ public class Designer implements Serializable{
             this.surname = surname;
             return this;
         }
-        /*public Builder laptop(Laptop laptop){
-            this.laptop = laptop;
-            return this;
-        }*/
-        /*public Builder computer(Computer comp){
-            this.comp = comp;
-            return this;
-        }*/
-        public Builder frame(Frame frame){
+        public Builder frame(Brand frame){
             this.frame = frame;
             return this;
         }
@@ -90,18 +76,28 @@ public class Designer implements Serializable{
             taskNum = designer.getTaskNum();
             broch = designer.getBrochure();
             frame = designer.getFrame();
-            /*comp = designer.getComputer();
-            laptop = designer.getLaptop();*/
             return this;
         }
         public Designer build(){
             return new Designer(this);
         }
+
+        public Builder taskNumber(String t) {
+            return this;
+        }
+
+        public Builder copy(Designer value) {
+            this.identification = value.identification;
+            this.name=value.name;
+            this.surname=value.surname;
+            this.taskNum= value.taskNum;
+            return  this;
+        }
     }
-    public void setIdentification(String identification) {
+    public void setIdentification(Long identification) {
         this.identification = identification;
     }
-    public String getIdentification() {
+    public Long getIdentification() {
         return identification;
     }
     public void setName(String name) {
@@ -128,24 +124,12 @@ public class Designer implements Serializable{
     public Brochure getBrochure() {
         return broch;
     }
-    public void setFrame(Frame frame) {
+    public void setFrame(Brand frame) {
         this.frame = frame;
     }
-    public Frame getFrame() {
+    public Brand getFrame() {
         return frame;
     }
-    /*public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
-    }
-    public Laptop getLaptop() {
-        return laptop;
-    }
-    public void setComputer(Computer comp) {
-        this.comp = comp;
-    }
-    public Computer getComputer() {
-        return comp;
-    }*/
     @Override
     public int hashCode() {
         int hash = 0;

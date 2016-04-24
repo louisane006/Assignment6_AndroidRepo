@@ -8,13 +8,10 @@ import java.io.Serializable;
 public class Invoice implements Serializable, Payment {
 
     private static final long serialVersionUID = 1L;
-   // @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+    private Long identification;
     private int invoiceNum;
-    //@OneToOne
-    //@JoinColumn(name = "invoice_id")
     private Cashier cashier;
+    private double amount;
 
     private Invoice(Builder b){
         invoiceNum = b.invoiceNum;
@@ -30,10 +27,15 @@ public class Invoice implements Serializable, Payment {
         return 0;
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
     public static class Builder{
         private int invoiceNum;
         private Cashier cashier;
-        private String identification;
+        private Long identification;
+        private double amount;
 
         public Builder(int invoiceNum) {
             this.invoiceNum = invoiceNum;
@@ -59,13 +61,31 @@ public class Invoice implements Serializable, Payment {
         public Invoice build(){
             return new Invoice(this);
         }
+
+        public Builder identification(Long i) {
+            identification = i;
+            return this;
+        }
+
+        public Builder amount(double aDouble) {
+            this.amount = aDouble;
+            return this;
+        }
+
+        public Builder copy(Invoice i) {
+            identification = i.getIdentification();
+            invoiceNum = i.getInvoiceNum();
+            cashier= i.getCashier();
+            amount = i.getAmount();
+            return this;
+        }
     }
 
-    public String getIdentification() {
+    public Long getIdentification() {
         return identification;
     }
 
-    public void setIdentification(String identification) {
+    public void setIdentification(Long identification) {
         this.identification = identification;
     }
 

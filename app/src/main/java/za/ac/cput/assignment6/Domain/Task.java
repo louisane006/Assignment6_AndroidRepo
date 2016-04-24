@@ -9,5 +9,4 @@ public interface Task extends Serializable{
     double cost();
 
     double price(int unitPrice, double jobDone);
-    //String custIdentity(Customer c);
 }

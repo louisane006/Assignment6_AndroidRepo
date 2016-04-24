@@ -5,6 +5,13 @@ import za.ac.cput.assignment6.Domain.Ipad;
 /**
  * Created by louisane Malu on 4/2/2016.
  */
-public interface IpadFactory {
-    Ipad createIpad(String identification, String name, String code, double price);
+public class IpadFactory {
+    public static Ipad i(Long i, String n, String c, double p){
+        return new Ipad.Builder()
+                .id(i)
+                .name(n)
+                .code(c)
+                .costPrice(p)
+                .build();
+    }
 }

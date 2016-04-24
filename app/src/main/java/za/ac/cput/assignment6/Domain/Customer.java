@@ -9,16 +9,20 @@ public class Customer implements Serializable, Payment {
     private static final long serialVersionUID = 1L;
     //@Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+    private Long identification;
     private String custNum;
     private String name;
     private String surname;
 
-    private Customer(Builder b){
+    public Customer(Builder b){
         identification = b.identification;
         name = b.name;
         surname = b.surname;
         custNum = b.custNum;
+    }
+
+    public Customer() {
+
     }
 
     @Override
@@ -32,13 +36,14 @@ public class Customer implements Serializable, Payment {
     }
 
     public static class Builder{
-        private String identification;
+        private Long identification;
         private String name;
         private String surname;
         private String custNum;
 
-        public Builder(String custNum) {
+        public Builder custNum(String custNum) {
             this.custNum = custNum;
+            return this;
         }
 
         public Builder name(String name){
@@ -51,7 +56,7 @@ public class Customer implements Serializable, Payment {
             return this;
         }
 
-        public Builder idendtification(String identification){
+        public Builder identification(Long identification){
             this.identification = identification;
             return this;
         }
@@ -62,14 +67,21 @@ public class Customer implements Serializable, Payment {
             custNum = cust.getCustNum();
             return this;
         }
+        public Builder copy(Customer value){
+            this.identification = value.identification;
+            this.custNum= value.custNum;
+            this.name=value.name;
+            this.surname=value.surname;
+            return  this;
+        }
         public Customer build(){
             return new Customer(this);
         }
     }
-    public void setIdentification(String identification) {
+    public void setIdentification(Long identification) {
         this.identification = identification;
     }
-    public String getIdentification() {
+    public Long getIdentification() {
         return identification;
     }
     public void setCustNum(String custNum) {

@@ -6,16 +6,13 @@ import java.util.List;
 /**
  * Created by louisane Malu on 4/2/2016.
  */
-//@Entity
+
 public class Shop implements Serializable, Parts{
     private static final long serialVersionUID = 1L;
-   // @Id
-   // @GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+
+    private Long identification;
     private double size;
     private String address;
-    //@OneToMany
-   // @JoinColumn(name = "shopID")
     List<Parts> part;
 
     private Shop(Builder b){
@@ -34,11 +31,16 @@ public class Shop implements Serializable, Parts{
         private double size;
         private String address;
         private List<Parts> part;
-        private String identification;
+        private Long identification;
 
         public Builder(String address) {
             this.address = address;
         }
+
+        public Builder() {
+
+        }
+
         public Builder size(double s){
             size = s;
             return this;
@@ -47,7 +49,7 @@ public class Shop implements Serializable, Parts{
             part = p;
             return this;
         }
-        public Builder identification(String identification){
+        public Builder identification(Long identification){
             this.identification = identification;
             return this;
         }
@@ -61,11 +63,27 @@ public class Shop implements Serializable, Parts{
         public Shop build(){
             return new Shop(this);
         }
+
+        public Builder address(String a) {
+            return this;
+        }
+
+        public Builder copy(Shop value) {
+
+            this.identification = value.identification;
+            this.size =value.size;
+            this.address=value.address;
+            this.part= value.part;
+            return  this;
+        }
+        public Builder part(String string) {
+            return this;
+        }
     }
-    public String getIdentification() {
+    public Long getIdentification() {
         return identification;
     }
-    public void setId(String identification) {
+    public void setId(Long identification) {
         this.identification = identification;
     }
     public double getSize() {

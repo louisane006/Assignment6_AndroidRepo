@@ -11,7 +11,7 @@ public class Credit implements Serializable, Payment {
     private static final long serialVersionUID = 1L;
     //@Id
    // @GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+    private Long identification;
     private double amount;
     private String name;
     private Credit(Builder b){
@@ -20,7 +20,7 @@ public class Credit implements Serializable, Payment {
         amount = b.amount;
     }
     public static class Builder{
-        private String identification;
+        private Long identification;
         private double amount;
         private String name;
 
@@ -28,13 +28,17 @@ public class Credit implements Serializable, Payment {
             this.name = name;
         }
 
+        public Builder() {
+
+        }
+
         public Builder amount(double a){
             amount = a;
             return this;
         }
 
-        public Builder identification(String i){
-            identification = i;
+        public Builder identification(Long id){
+            this.identification = id;
             return this;
 
         }
@@ -47,11 +51,23 @@ public class Credit implements Serializable, Payment {
         public Credit build(){
             return new Credit(this);
         }
+
+        public Builder name(String n) {
+            this.name = n;
+            return this;
+        }
+
+        public Builder copy(Credit value) {
+            this.identification = value.identification;
+            this.amount = value.amount;
+            this.name=value.name;
+            return  this;
+        }
     }
-    public String getIdentification() {
+    public Long getIdentification() {
         return identification;
     }
-    public void setId(String identification) {
+    public void setId(Long identification) {
         this.identification = identification;
     }
     public double getAmount() {

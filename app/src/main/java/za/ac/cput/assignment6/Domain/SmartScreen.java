@@ -5,17 +5,15 @@ import java.io.Serializable;
 /**
  * Created by louisane Malu on 4/1/2016.
  */
-    //@Entity
+
     public class SmartScreen implements Serializable, Parts {
     private static final long serialVersionUID = 1L;
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+    private Long identification;
     private String name;
     private String code;
     private double price;
 
-    private SmartScreen(Builder b) {
+    public SmartScreen(Builder b) {
         identification = b.identification;
         name = b.name;
         code = b.code;
@@ -27,7 +25,7 @@ import java.io.Serializable;
     }
 
     public static class Builder {
-        private String identification;
+        private Long identification;
         private String name;
         private String code;
         private double price;
@@ -46,7 +44,7 @@ import java.io.Serializable;
             return this;
         }
 
-        public Builder id(String i) {
+        public Builder id(Long i) {
             this.identification = i;
             return this;
         }
@@ -56,7 +54,7 @@ import java.io.Serializable;
             return this;
         }
 
-        public Builder smartboard(SmartScreen screen) {
+        public Builder smartScreen(SmartScreen screen) {
             this.identification = screen.getIdentification();
             name = screen.getName();
             code = screen.getCode();
@@ -65,6 +63,14 @@ import java.io.Serializable;
         }
         public SmartScreen build() {
             return new SmartScreen(this);
+        }
+
+        public Builder copy(SmartScreen screen) {
+            identification = screen.identification;
+            name = screen.getName();
+            code = screen.getCode();
+            price = screen.getPrice();
+            return this;
         }
     }
     public String getName() {
@@ -91,11 +97,11 @@ import java.io.Serializable;
         this.price = price;
     }
 
-    public String getIdentification() {
+    public Long getIdentification() {
         return identification;
     }
 
-    public void setId(String identification) {
+    public void setId(Long identification) {
         this.identification = identification;
     }
 
@@ -120,6 +126,6 @@ import java.io.Serializable;
 
     @Override
     public String toString() {
-        return "Smartboard{" + "id=" + identification + ", name=" + name + ", code=" + code + '}';
+        return "SmartScreen{" + "id=" + identification + ", name =" + name + ", code =" + code + '}';
     }
 }

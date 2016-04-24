@@ -5,12 +5,11 @@ import java.io.Serializable;
 /**
  * Created by louisane Malu on 4/1/2016.
  */
-//@Entity
+
 public class VideoCamera implements Serializable, Parts{
     private static final long serialVersionUID = 1L;
-   // @Id
-   // @GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+
+    private Long identification;
     private String name;
     private String code;
     private double price;
@@ -21,22 +20,13 @@ public class VideoCamera implements Serializable, Parts{
         this.name = b.name;
         this.price = b.price;
     }
-
-   /* public double price(int unitPrice, double jobDone) {
-        return 0;
-    }
-
-    public String custIdentity(Customer c) {
-        return null;
-    }*/
-
     @Override
     public double price() {
         return price;
     }
 
     public static class Builder{
-        private String identification;
+        private Long identification;
         private String name;
         private String code;
         private double price;
@@ -54,7 +44,7 @@ public class VideoCamera implements Serializable, Parts{
             return this;
         }
 
-        public Builder id(String i){
+        public Builder id(Long i){
             identification = i;
             return this;
         }
@@ -72,13 +62,21 @@ public class VideoCamera implements Serializable, Parts{
         public VideoCamera build(){
             return new VideoCamera(this);
         }
+
+        public Builder copy(VideoCamera vid) {
+            identification = vid.identification;
+            name = vid.getName();
+            code = vid.getCode();
+            price = vid.getCostPrice();
+            return this;
+        }
     }
 
-    public String getIdentification() {
+    public Long getIdentification() {
         return identification;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         identification = id;
     }
 

@@ -10,7 +10,7 @@ public class Laptop implements Serializable, Parts {
     private static final long serialVersionUID = 1L;
     //@Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+    private Long identification;
     private String name;
     private String code;
     private double price;
@@ -30,7 +30,7 @@ public class Laptop implements Serializable, Parts {
     }
 
     public static class Builder {
-        private String identification;
+        private Long identification;
         private String name;
         private String code;
         private double price;
@@ -49,7 +49,7 @@ public class Laptop implements Serializable, Parts {
             return this;
         }
 
-        public Builder id(String i) {
+        public Builder id(Long i) {
             identification = i;
             return this;
         }
@@ -70,13 +70,21 @@ public class Laptop implements Serializable, Parts {
         public Laptop build() {
             return new Laptop(this);
         }
+
+        public Builder copy(Laptop l) {
+            identification = l.getId();
+            name = l.getName();
+            code= l.getCode();
+            price = l.getPrice();
+            return this;
+        }
     }
 
-    public String getId() {
+    public Long getId() {
         return identification;
     }
 
-    public void setId(String identification) {
+    public void setId(Long identification) {
         this.identification = identification;
     }
 

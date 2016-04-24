@@ -10,7 +10,7 @@ public class Ipad implements Serializable, Parts {
     private static final long serialVersionUID = 1L;
     //@Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+    private Long identification;
     private String name;
     private String code;
     private double price;
@@ -28,7 +28,7 @@ public class Ipad implements Serializable, Parts {
     }
 
     public static class Builder{
-        private String identification;
+        private Long identification;
         private String name;
         private String code;
         private double price;
@@ -42,7 +42,7 @@ public class Ipad implements Serializable, Parts {
             name = n;
             return this;
         }
-        public Builder id(String i){
+        public Builder id(Long i){
             identification = i;
             return this;
         }
@@ -60,11 +60,19 @@ public class Ipad implements Serializable, Parts {
         public Ipad build(){
             return new Ipad(this);
         }
+
+        public Builder copy(Ipad i) {
+            identification = i.getIdentification();
+            name = i.getName();
+            code= i.getCode();
+            price = i.getPrice();
+            return this;
+        }
     }
-    public String getIdentification() {
+    public Long getIdentification() {
         return identification;
     }
-    public void setId(String identification) {
+    public void setId(Long identification) {
         this.identification = identification;
     }
     public String getName() {

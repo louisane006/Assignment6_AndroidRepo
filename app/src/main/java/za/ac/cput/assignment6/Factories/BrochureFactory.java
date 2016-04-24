@@ -7,7 +7,15 @@ import za.ac.cput.assignment6.Domain.Designer;
 /**
  * Created by louisane Malu on 4/2/2016.
  */
-public interface BrochureFactory {
-        Brochure createBrochure(Designer design, String desc, String taskNumber, Customer customer, double price);
-    }
+public class BrochureFactory {
+    public static Brochure cashier(Customer cust, String d, Long i, String n, double p, Designer des) {
+        return new Brochure.Builder()
+                .designer(des)
+                .desc(d)
+                .id(i)
+                .customer(cust)
+                .price(p)
+                .build();
 
+    }
+}

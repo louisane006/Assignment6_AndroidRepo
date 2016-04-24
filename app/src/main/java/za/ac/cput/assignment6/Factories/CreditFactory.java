@@ -5,6 +5,12 @@ import za.ac.cput.assignment6.Domain.Credit;
 /**
  * Created by louisane Malu on 4/2/2016.
  */
-public interface CreditFactory {
-    Credit createCredit(String identification, double amount, String name);
+public class CreditFactory {
+    public static Credit credit(Long id, double amt, String n){
+        return new Credit.Builder()
+                .identification(id)
+                .amount(amt)
+                .name(n)
+                .build();
+    }
 }

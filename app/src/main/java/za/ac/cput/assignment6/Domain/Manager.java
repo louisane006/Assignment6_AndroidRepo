@@ -10,38 +10,29 @@ public class Manager implements Serializable {
     private static final long serialVersionUID = 1L;
    // @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String identification;
+    private Long identification;
     private String name;
     private String surname;
     private String taskNumber;
-    //@OneToMany
-    //@JoinColumn(name = "manager_id")
-    private Task task;
-    //@OneToOne
-    //@JoinColumn(name = "manager_id")
-    private SmartScreen screen;
-    private Laptop laptop;
 
-    private Manager(Builder b){
+    public Manager(Builder b){
         this.name = b.name;
         surname = b.surname;
         this.taskNumber  = b.taskNumber;
-        this.task = b.task;
         this.identification = b.identification;
-        screen = b.screen;
-        this.laptop = b.laptop;
     }
     public static class Builder{
         private String name;
         private String surname;
         private String taskNumber;
-        private Task task;
-        private SmartScreen screen;
-        private Laptop laptop;
-        private String identification;
+        private Long identification;
 
         public Builder(String taskNumber) {
             this.taskNumber = taskNumber;
+        }
+
+        public Builder() {
+
         }
 
         public Builder name(String name){
@@ -52,41 +43,37 @@ public class Manager implements Serializable {
             this.surname = surname;
             return this;
         }
-
-        public Builder task(Task task){
-            this.task = task;
-            return this;
-        }
-        public Builder id(String i){
+        public Builder id(Long i){
             identification = i;
-            return this;
-        }
-        public Builder smartscreen(SmartScreen s){
-            this.screen = s;
-            return this;
-        }
-        public Builder latop(Laptop p){
-            laptop = p;
             return this;
         }
         public Builder manager(Manager m){
             identification = m.getId();
-            screen = m.getScreen();
             name = m.getName();
             surname = m.getSurname();
             taskNumber = m.getTaskNumber();
-            task = m.getTaskId();
-            laptop= m.getLaptop();
             return this;
         }
         public Manager build(){
             return new Manager(this);
         }
+
+        public Builder taskNum(String string) {
+            return this;
+        }
+
+        public Builder copy(Manager value) {
+            this.identification = value.identification;
+            this.name=value.name;
+            this.surname=value.surname;
+            this.taskNumber= value.taskNumber;
+            return  this;
+        }
     }
-    public String getId() {
+    public Long getId() {
         return identification;
     }
-    public void setId(String identification) {
+    public void setId(Long identification) {
         this.identification = identification;
     }
 
@@ -113,29 +100,6 @@ public class Manager implements Serializable {
     public void setTaskNumber(String taskNumber){
         this.taskNumber = taskNumber;
     }
-
-    public Laptop getLaptop() {
-        return laptop;
-    }
-
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
-    }
-    public Task getTaskId() {
-        return task;
-    }
-    public void setTaskID(Task task) {
-        this.task = task;
-    }
-
-    public SmartScreen getScreen() {
-        return screen;
-    }
-
-    public void setBoard(SmartScreen board) {
-        this.screen = board;
-    }
-
 
     @Override
     public int hashCode() {

@@ -6,32 +6,23 @@ import java.io.Serializable;
  * Created by louisane Malu on 3/29/2016.
  */
 public class Brochure implements Serializable, Task{
-    private int unitPrice;
-
-    public String custIdentity(Customer c) {
-        return null;
-    }
     private Designer designer;
     private String desc;
-    //@OneToMany
-    //@JoinColumn(name = "brochure_ID")
     private Customer customer;
-    private String taskNum;
-    //@ManyToOne
-    //@JoinColumn( name= "brochure_ID", insertable=false, updatable=false)
+    private Long id;
     private double price ;
 
     private Brochure(Builder b){
         this.desc = b.desc;
-        designer = b.designer;
-        taskNum = b.taskNum;
+        this.designer = b.designer;
+        this.id = b.id;
         customer = b.customer;
         price = b.price;
     }
     public static class Builder{
         private Designer designer;
         private String desc;
-        private String taskNum;
+        private Long id;
         private Customer customer;
         private double price;
 
@@ -49,8 +40,8 @@ public class Brochure implements Serializable, Task{
             this.customer = customer;
             return this;
         }
-        public Builder taskNum(String taskNum){
-            this.taskNum = taskNum;
+        public Builder id(Long id){
+            this.id = id;
             return this;
         }
         public Builder price(double price){
@@ -60,7 +51,7 @@ public class Brochure implements Serializable, Task{
         public Builder copy(Brochure b){
             designer = b.getDesigner();
             desc = b.getDescription();
-            taskNum = b.getTaskNum();
+            id = b.getId();
             customer = b.getCustomer();
             price = b.getPrice();
             return this;
@@ -68,6 +59,7 @@ public class Brochure implements Serializable, Task{
         public Brochure build(){
             return new Brochure(this);
         }
+
     }
     public Designer getDesigner() {
         return designer;
@@ -89,12 +81,12 @@ public class Brochure implements Serializable, Task{
         this.price = price;
     }
 
-    public String getTaskNum() {
-        return taskNum;
+    public Long getId() {
+        return id;
     }
 
-    public void setWorkID(String taskNum) {
-        this.taskNum= taskNum;
+    public void setWorkID(Long id) {
+        this.id= id;
     }
 
     public Customer getCustomer() {
@@ -120,7 +112,7 @@ public class Brochure implements Serializable, Task{
             return false;
         }
         final Brochure other = (Brochure) obj;
-        if ((this.desc == null) ? (other.desc!= null) : !this.desc.equals(other.desc)) {
+        if ((this.id == null) ? (other.desc!= null) : !this.desc.equals(other.id)) {
             return false;
         }
         return true;
@@ -131,7 +123,7 @@ public class Brochure implements Serializable, Task{
 
     @Override
     public double price(int unitPrice, double jobDone) {
-        this.unitPrice = unitPrice;
+        this.price = unitPrice;
         return unitPrice * jobDone;
     }
     public String customerIdentity(Customer c) {
